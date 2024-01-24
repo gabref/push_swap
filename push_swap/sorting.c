@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:58:18 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/24 19:53:16 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/24 22:21:56 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	not_sorted(t_ds *a)
 {
 	int	i;
-	int					swaps_needed;
+	int	swaps_needed;
 
-	i = (int) a->len - 1;
+	i = (int)a->len - 1;
 	swaps_needed = 0;
 	while (--i >= 0)
 		if (a->arr[i] < a->arr[i + 1])

@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:28 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/24 21:34:46 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/24 21:40:22 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int ac, char **av)
 	else if (ac == 2)
 		av = split(av[1], ' ');
 	a = init_ds(&av[1], ac == 2);
-	b = init_tmp_ds(ac - 1);
+	b = init_tmp_ds(&av[1]);
 	if (a == NULL || b == NULL)
 	{
 		free_all_ds(a, b, ac == 2, av + 1);
