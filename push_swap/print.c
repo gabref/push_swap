@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 17:30:13 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/25 13:03:33 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:11:47 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	putstr_fd(int fd, char *s)
 {
 	while (*s)
-		write(fd, s++, 1);
+		(void)write(fd, s++, 1);
 }
 
 void	putstr(char *s)
 {
 	while (*s)
-		write(1, s++, 1);
+		(void)write(1, s++, 1);
 }
 
 void	print_operation(char *op, char *ds_name)

@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:47:58 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/25 13:21:44 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:31:39 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ t_ds	*init_ds(char **numbers, int flag)
 		num = atoi_l(numbers[s->len]);
 		if (num > INT_MAX || num < INT_MIN || not_a_number(numbers[s->len])
 			|| find_duplicate(s, num))
+		{
+			free_ds(s);
 			return (NULL);
+		}
 		s->arr[--size] = (int)num;
 		s->len++;
 	}
