@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:08:29 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/24 22:22:23 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:21:15 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 typedef struct s_ds
 {
 	long unsigned int	len;
+	long unsigned int	cap;
 	int					*arr;
 	char				*name;
 }						t_ds;
@@ -55,11 +56,17 @@ void					free_all_ds(t_ds *a, t_ds *b, int ac_2,
 void					sort(t_ds *a, t_ds *b);
 int						not_sorted(t_ds *a);
 
+void					putstr_fd(int fd, char *s);
 void					putstr(char *s);
 char					**split(char *str, char sep);
 long					atoi_l(char *s);
 int						find_duplicate(t_ds *s, int n);
 int						not_a_number(char *str);
+int						peek(t_ds *s, int top_index);
+int						smallest(t_ds *s);
+int						smallest_with_limit(t_ds *s, int limit);
+void					exit_with_error(void);
+
 void					print_operation(char *op, char *ds_name);
 
 #endif

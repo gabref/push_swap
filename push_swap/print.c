@@ -6,11 +6,17 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 17:30:13 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/24 18:31:01 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:03:33 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	putstr_fd(int fd, char *s)
+{
+	while (*s)
+		write(fd, s++, 1);
+}
 
 void	putstr(char *s)
 {

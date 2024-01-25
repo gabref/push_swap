@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:32:46 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/24 22:21:28 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:26:11 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,10 @@ void	free_all_ds(t_ds *a, t_ds *b, int ac_2, char **splitted)
 	free_ds(b);
 	if (ac_2)
 		free_splitted_chars(splitted);
+}
+
+void	exit_with_error(void)
+{
+	putstr_fd(2, "Error\n");
+	exit(1);
 }

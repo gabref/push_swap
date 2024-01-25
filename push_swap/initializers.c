@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:47:58 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/24 22:19:49 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:21:44 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_ds	*alloc_ds(char *name, int size)
 	if (s == NULL)
 		return (NULL);
 	s->len = 0;
+	s->cap = size;
 	s->name = name;
 	s->arr = malloc(sizeof(int) * size);
 	if (s->arr == NULL)
