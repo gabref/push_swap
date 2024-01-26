@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:08:29 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/25 13:21:15 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:36:42 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_ds
 }						t_ds;
 
 void					print_array(t_ds *s);
-t_ds					*init_ds(char **numbers, int flag);
+t_ds					*init_ds(char **numbers);
 t_ds					*init_tmp_ds(char **numbers);
 
 void					swap(t_ds *s, int flag);

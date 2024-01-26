@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:47:58 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/25 14:31:39 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:36:26 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,12 @@ t_ds	*alloc_ds(char *name, int size)
 	return (s);
 }
 
-t_ds	*init_ds(char **numbers, int flag)
+t_ds	*init_ds(char **numbers)
 {
 	t_ds	*s;
 	int		size;
 	long	num;
 
-	(void)flag;
 	if (numbers == NULL)
 		return (NULL);
 	size = number_of_arguments(numbers);
