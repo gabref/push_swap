@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:47:58 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/27 13:44:01 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/27 21:57:24 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	number_of_arguments(char **numbers)
 	return (count);
 }
 
-void init_max_min(t_ds *s)
+void	init_max_min(t_ds *s)
 {
 	s->max = biggest(s);
 	s->min = smallest(s);
@@ -83,7 +83,5 @@ t_ds	*init_tmp_ds(char **numbers)
 
 	size = number_of_arguments(numbers);
 	b = alloc_ds(DS_B, size);
-	// b->max = INT_MAX;
-	// b->min = INT_MIN;
 	return (b);
 }

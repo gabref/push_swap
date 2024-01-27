@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:58:18 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/27 15:22:09 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/27 21:56:52 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,49 +15,30 @@
 void	sort_3_elements(t_ds *s)
 {
 	int	max;
-	int	min;
 
 	max = biggest(s);
-	min = smallest(s);
-	if (max == peek(s, 0))
-	{
-		if (min == peek(s, 1))
-			rotate(s, 1);
-		else
-		{
-			swap(s, 1);
-			rotate_reverse(s, 1);
-		}
-	}
-	else if (max == peek(s, 1))
-	{
-		if (min == peek(s, 0))
-		{
-			swap(s, 1);
-			rotate(s, 1);
-		}
-		else
-			rotate_reverse(s, 1);
-	}
-	else if (max == peek(s, 2) && min == peek(s, 1))
+	if (peek(s, 0) == max)
+		rotate(s, 1);
+	else if (peek(s, 1) == max)
+		rotate_reverse(s, 1);
+	if (peek(s, 0) > peek(s, 1))
 		swap(s, 1);
 }
 
 void	sort(t_ds *a, t_ds *b)
 {
 	int	i;
-	int					direction;
+	int	direction;
 
 	while (a->len > 3)
 		push(b, a);
 	sort_3_elements(a);
-	// print_array(a);
-	// print_array(b);
 	while (b->len > 0)
 		move_cheapest(b, a, find_cheapest(b, a));
 	i = find_index_of(a, a->min);
 	direction = i <= a->len / 2;
 	while (i != 0)
+	{
 		if (direction)
 		{
 			rotate(a, 1);
@@ -68,6 +49,7 @@ void	sort(t_ds *a, t_ds *b)
 			rotate_reverse(a, 1);
 			i = (i + 1) % a->len;
 		}
+	}
 }
 
 // void	sort(t_ds *a, t_ds *b)

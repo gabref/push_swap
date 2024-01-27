@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 17:40:27 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/27 15:22:20 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/27 21:36:07 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,5 @@ void	push(t_ds *dst, t_ds *src)
 	else if (peek(src, 0) < dst->min)
 		dst->min = peek(src, 0);
 	dst->arr[dst->len++] = src->arr[--(src->len)];
-	// printf("\n");
-	// print_array(src);
-	// print_array(dst);
-	// printf("\n");
 	print_operation(OPERATION_PUSH, dst->name);
 }
