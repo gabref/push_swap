@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:08:29 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/27 11:18:34 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/27 14:58:32 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,46 +30,48 @@
 
 typedef struct s_ds
 {
-	long unsigned int	len;
-	long unsigned int	cap;
-	int					min;
-	int					max;
-	int					*arr;
-	char				*name;
-}						t_ds;
+	int		len;
+	int		cap;
+	int		min;
+	int		max;
+	int		*arr;
+	char	*name;
+}			t_ds;
 
-void					print_array(t_ds *s);
-t_ds					*init_ds(char **numbers);
-t_ds					*init_tmp_ds(char **numbers);
+void		print_array(t_ds *s);
+t_ds		*init_ds(char **numbers);
+t_ds		*init_tmp_ds(char **numbers);
 
-void					swap(t_ds *s, int flag);
-void					swap_both(t_ds *a, t_ds *b);
-void					push(t_ds *dst, t_ds *src);
-void					rotate(t_ds *s, int flag);
-void					rotate_reverse(t_ds *s, int flag);
-void					rotate_both(t_ds *a, t_ds *b);
-void					rotate_reverse_both(t_ds *a, t_ds *b);
+void		swap(t_ds *s, int flag);
+void		swap_both(t_ds *a, t_ds *b);
+void		push(t_ds *dst, t_ds *src);
+void		rotate(t_ds *s, int flag);
+void		rotate_reverse(t_ds *s, int flag);
+void		rotate_both(t_ds *a, t_ds *b);
+void		rotate_reverse_both(t_ds *a, t_ds *b);
 
-void					free_splitted_chars(char **splitted);
-void					free_ds(t_ds *s);
-void					free_all_ds(t_ds *a, t_ds *b, int ac_2,
-							char **splitted);
+void		free_splitted_chars(char **splitted);
+void		free_ds(t_ds *s);
+void		free_all_ds(t_ds *a, t_ds *b, int ac_2, char **splitted);
 
-void					sort(t_ds *a, t_ds *b);
-int						not_sorted(t_ds *a);
+void		sort(t_ds *a, t_ds *b);
+int			not_sorted(t_ds *a);
 
-void					putstr_fd(int fd, char *s);
-void					putstr(char *s);
-char					**split(char *str, char sep);
-long					atoi_l(char *s);
-int						find_duplicate(t_ds *s, int n);
-int						not_a_number(char *str);
-int						peek(t_ds *s, int top_index);
-int						smallest(t_ds *s);
-int						biggest(t_ds *s);
-int						smallest_with_limit(t_ds *s, int limit);
-void					exit_with_error(void);
+void		putstr_fd(int fd, char *s);
+void		putstr(char *s);
+char		**split(char *str, char sep);
+long		atoi_l(char *s);
+int			find_duplicate(t_ds *s, int n);
+int			not_a_number(char *str);
+int			peek(t_ds *s, int top_index);
+int			smallest(t_ds *s);
+int			biggest(t_ds *s);
+int			smallest_with_limit(t_ds *s, int limit);
+void		exit_with_error(void);
+int			find_index_of(t_ds *s, int n);
+void		move_cheapest(t_ds *s, t_ds *t, int cheapest_idx);
+int			find_cheapest(t_ds *s, t_ds *t);
 
-void					print_operation(char *op, char *ds_name);
+void		print_operation(char *op, char *ds_name);
 
 #endif

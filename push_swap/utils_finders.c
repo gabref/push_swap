@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 11:05:05 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/27 11:12:55 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/27 14:58:26 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	find_duplicate(t_ds *s, int n)
 {
-	long unsigned int	i;
+	int	i;
 
 	i = 0;
 	if (!s)
@@ -27,20 +27,20 @@ int	find_duplicate(t_ds *s, int n)
 
 int	find_index_of(t_ds *s, int n)
 {
-	long unsigned int	i;
+	int i;
 
 	i = 0;
 	if (!s)
 		return (0);
 	while (i < s->len)
-		if (s->arr[s->cap - 1 - i++] == n)
-			return (i);
+		if (peek(s, i++) == n)
+			return (i - 1);
 	return (-1);
 }
 
 int	smallest(t_ds *s)
 {
-	long unsigned int	i;
+	int	i;
 	int					min;
 	int					n;
 
@@ -57,7 +57,7 @@ int	smallest(t_ds *s)
 
 int	biggest(t_ds *s)
 {
-	long unsigned int	i;
+	int	i;
 	int					max;
 	int					n;
 
@@ -74,7 +74,7 @@ int	biggest(t_ds *s)
 
 int	smallest_with_limit(t_ds *s, int limit)
 {
-	long unsigned int	i;
+	int	i;
 	int					min;
 	int					n;
 	int					max;

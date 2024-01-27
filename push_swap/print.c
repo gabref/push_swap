@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 17:30:13 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/27 11:41:25 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/27 14:57:40 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ void	print_operation(char *op, char *ds_name)
 
 void	print_array(t_ds *s)
 {
-	long unsigned int	i;
+	int	i;
 
 	i = s->len;
+	printf("%s | ", s->name);
 	while (i)
 		printf("%d ", s->arr[--i]);
-	printf("| max: %d, min: %d", s->max, s->min);
+	if (s->len > 0)
+		printf("| max: %d, min: %d", s->max, s->min);
 	printf("\n");
 }

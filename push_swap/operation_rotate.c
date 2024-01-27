@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:00:57 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/24 18:29:10 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/27 14:57:29 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	rotate(t_ds *s, int flag)
 
 void	rotate_reverse(t_ds *s, int flag)
 {
-	long unsigned int	i;
+	int	i;
 	int					tmp;
 
 	if (s->len < 2)

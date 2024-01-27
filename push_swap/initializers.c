@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:47:58 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/27 11:40:17 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/27 13:44:01 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,7 @@ t_ds	*init_tmp_ds(char **numbers)
 
 	size = number_of_arguments(numbers);
 	b = alloc_ds(DS_B, size);
+	// b->max = INT_MAX;
+	// b->min = INT_MIN;
 	return (b);
 }

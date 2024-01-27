@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 17:40:27 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/27 11:38:12 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:22:20 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int	biggest_from_index(t_ds *s, int idx)
 {
-	long unsigned int	i;
-	int					max;
-	int					n;
+	int	max;
+	int	n;
 
-	i = (long unsigned int)idx;
-	max = peek(s, i);
-	while (i < s->len)
+	if (idx > s->len - 1)
+		return (0);
+	max = peek(s, idx);
+	while (idx < s->len)
 	{
-		n = peek(s, i++);
+		n = peek(s, idx++);
 		if (n > max)
 			max = n;
 	}
@@ -31,15 +31,15 @@ int	biggest_from_index(t_ds *s, int idx)
 
 int	smallest_from_index(t_ds *s, int idx)
 {
-	long unsigned int	i;
-	int					min;
-	int					n;
+	int	min;
+	int	n;
 
-	i = (long unsigned int)idx;
-	min = peek(s, i);
-	while (i < s->len)
+	if (idx > s->len - 1)
+		return (0);
+	min = peek(s, idx);
+	while (idx < s->len)
 	{
-		n = peek(s, i++);
+		n = peek(s, idx++);
 		if (n < min)
 			min = n;
 	}
@@ -50,14 +50,28 @@ void	push(t_ds *dst, t_ds *src)
 {
 	if (src->len == 0)
 		return ;
-	if (peek(src, 0) == src->max)
+	else if (src->len == 1)
+	{
+		src->max = 0;
+		src->min = 0;
+	}
+	else if (peek(src, 0) == src->max)
 		src->max = biggest_from_index(src, 1);
 	else if (peek(src, 0) == src->min)
-		src->max = smallest_from_index(src, 1);
-	if (peek(src, 0) > dst->max)
+		src->min = smallest_from_index(src, 1);
+	if (dst->len == 0)
+	{
+		dst->max = peek(src, 0);
+		dst->min = peek(src, 0);
+	}
+	else if (peek(src, 0) > dst->max)
 		dst->max = peek(src, 0);
 	else if (peek(src, 0) < dst->min)
 		dst->min = peek(src, 0);
 	dst->arr[dst->len++] = src->arr[--(src->len)];
+	// printf("\n");
+	// print_array(src);
+	// print_array(dst);
+	// printf("\n");
 	print_operation(OPERATION_PUSH, dst->name);
 }
