@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:47:58 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/25 14:36:26 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/27 11:40:17 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ int	number_of_arguments(char **numbers)
 	while (numbers[count])
 		count++;
 	return (count);
+}
+
+void init_max_min(t_ds *s)
+{
+	s->max = biggest(s);
+	s->min = smallest(s);
 }
 
 t_ds	*alloc_ds(char *name, int size)
@@ -66,6 +72,7 @@ t_ds	*init_ds(char **numbers)
 		s->arr[--size] = (int)num;
 		s->len++;
 	}
+	init_max_min(s);
 	return (s);
 }
 

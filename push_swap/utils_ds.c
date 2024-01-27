@@ -1,43 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   utils_ds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/24 17:30:13 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/27 11:41:25 by galves-f         ###   ########.fr       */
+/*   Created: 2024/01/27 11:08:19 by galves-f          #+#    #+#             */
+/*   Updated: 2024/01/27 11:17:55 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	putstr_fd(int fd, char *s)
+int	not_sorted(t_ds *a)
 {
-	while (*s)
-		(void)write(fd, s++, 1);
+	int	i;
+
+	i = (int)a->len - 1;
+	while (--i >= 0)
+		if (a->arr[i] < a->arr[i + 1])
+			return (1);
+	return (0);
 }
 
-void	putstr(char *s)
+int	peek(t_ds *s, int top_index)
 {
-	while (*s)
-		(void)write(1, s++, 1);
-}
-
-void	print_operation(char *op, char *ds_name)
-{
-	putstr(op);
-	putstr(ds_name);
-	putstr("\n");
-}
-
-void	print_array(t_ds *s)
-{
-	long unsigned int	i;
-
-	i = s->len;
-	while (i)
-		printf("%d ", s->arr[--i]);
-	printf("| max: %d, min: %d", s->max, s->min);
-	printf("\n");
+	return (s->arr[s->len - 1 - top_index]);
 }

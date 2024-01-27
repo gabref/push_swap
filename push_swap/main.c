@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:28 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/25 14:36:48 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/27 11:42:30 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main(int ac, char **av)
 		putstr_fd(2, "Error\n");
 		return (1);
 	}
+	// print_array(a);
 	if (not_sorted(a))
 	{
 		// printf("sorting\n");

@@ -6,22 +6,11 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:58:18 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/25 12:13:46 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/27 11:14:04 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	not_sorted(t_ds *a)
-{
-	int	i;
-
-	i = (int)a->len - 1;
-	while (--i >= 0)
-		if (a->arr[i] < a->arr[i + 1])
-			return (1);
-	return (0);
-}
 
 void	sort(t_ds *a, t_ds *b)
 {

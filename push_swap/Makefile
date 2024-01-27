@@ -6,7 +6,7 @@
 #    By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 16:03:10 by galves-f          #+#    #+#              #
-#    Updated: 2024/01/25 14:13:42 by galves-f         ###   ########.fr        #
+#    Updated: 2024/01/27 11:07:27 by galves-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,8 @@ SRCS			= initializers.c \
 				  	free_utils.c \
 				  	sorting.c \
 				  	utils.c \
+				  	utils_ds.c \
+				  	utils_finders.c \
 				  	split.c \
 					operation_swap.c \
 					operation_push.c \

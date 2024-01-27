@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:08:29 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/25 14:36:42 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/27 11:18:34 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_ds
 {
 	long unsigned int	len;
 	long unsigned int	cap;
+	int					min;
+	int					max;
 	int					*arr;
 	char				*name;
 }						t_ds;
@@ -64,6 +66,7 @@ int						find_duplicate(t_ds *s, int n);
 int						not_a_number(char *str);
 int						peek(t_ds *s, int top_index);
 int						smallest(t_ds *s);
+int						biggest(t_ds *s);
 int						smallest_with_limit(t_ds *s, int limit);
 void					exit_with_error(void);
 
