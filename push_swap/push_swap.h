@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:08:29 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/28 10:07:58 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/28 10:27:44 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ t_ds		*init_ds(char **numbers);
 t_ds		*init_tmp_ds(char **numbers);
 
 void		swap(t_ds *s, int flag);
-void		swap_both(t_ds *a, t_ds *b);
-void		push(t_ds *dst, t_ds *src);
+void		swap_both(t_ds *a, t_ds *b, int flag);
+void		push(t_ds *dst, t_ds *src, int flag);
 void		rotate(t_ds *s, int flag);
 void		rotate_reverse(t_ds *s, int flag);
-void		rotate_both(t_ds *a, t_ds *b);
-void		rotate_reverse_both(t_ds *a, t_ds *b);
+void		rotate_both(t_ds *a, t_ds *b, int flag);
+void		rotate_reverse_both(t_ds *a, t_ds *b, int flag);
 
 void		free_splitted_chars(char **splitted);
 void		free_ds(t_ds *s);

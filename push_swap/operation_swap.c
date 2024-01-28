@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 17:17:11 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/27 14:03:47 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/28 10:30:02 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ void	swap(t_ds *s, int flag)
 		print_operation(OPERATION_SWAP, s->name);
 }
 
-void	swap_both(t_ds *a, t_ds *b)
+void	swap_both(t_ds *a, t_ds *b, int flag)
 {
 	swap(a, 0);
 	swap(b, 0);
-	print_operation(OPERATION_SWAP, DS_BOTH_SWAP);
+	if (flag)
+		print_operation(OPERATION_SWAP, DS_BOTH_SWAP);
 }

@@ -4,3 +4,5 @@ a.out
 push_swap_visualizer
 Push-Swap-Tester/
 push_swap/push_swap_averager/
+push_swap/checker
+push_swap/checker_linux

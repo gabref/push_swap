@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:58:18 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/28 10:08:37 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/28 10:29:06 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	move_cheapest(t_ds *s, t_ds *t, int cheapest_idx,
 		{
 			if (cheapest_idx > s->len / 2 && target_idx > t->len / 2)
 			{
-				rotate_reverse_both(s, t);
+				rotate_reverse_both(s, t, 1);
 				cheapest_idx = (cheapest_idx + 1) % s->len;
 				target_idx = (target_idx + 1) % t->len;
 			}
 			else
 			{
-				rotate_both(s, t);
+				rotate_both(s, t, 1);
 				cheapest_idx--;
 				target_idx--;
 			}
@@ -39,7 +39,7 @@ void	move_cheapest(t_ds *s, t_ds *t, int cheapest_idx,
 	}
 	remaining_rotations_individual_stack(s, cheapest_idx);
 	remaining_rotations_individual_stack(t, target_idx);
-	push(t, s);
+	push(t, s, 1);
 }
 
 void	sort_3_elements(t_ds *s)

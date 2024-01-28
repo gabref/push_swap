@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:00:57 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/27 21:57:35 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/28 10:28:39 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,18 @@ void	rotate_reverse(t_ds *s, int flag)
 		print_operation(OPERATION_ROTATE_REVERSE, s->name);
 }
 
-void	rotate_both(t_ds *a, t_ds *b)
+void	rotate_both(t_ds *a, t_ds *b, int flag)
 {
 	rotate(a, 0);
 	rotate(b, 0);
-	print_operation(OPERATION_ROTATE, DS_BOTH_ROTATE);
+	if (flag)
+		print_operation(OPERATION_ROTATE, DS_BOTH_ROTATE);
 }
 
-void	rotate_reverse_both(t_ds *a, t_ds *b)
+void	rotate_reverse_both(t_ds *a, t_ds *b, int flag)
 {
 	rotate_reverse(a, 0);
 	rotate_reverse(b, 0);
-	print_operation(OPERATION_ROTATE_REVERSE, DS_BOTH_ROTATE);
+	if (flag)
+		print_operation(OPERATION_ROTATE_REVERSE, DS_BOTH_ROTATE);
 }

@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 17:40:27 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/27 21:36:07 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/28 10:27:07 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	smallest_from_index(t_ds *s, int idx)
 	return (min);
 }
 
-void	push(t_ds *dst, t_ds *src)
+void	push(t_ds *dst, t_ds *src, int flag)
 {
 	if (src->len == 0)
 		return ;
@@ -69,5 +69,6 @@ void	push(t_ds *dst, t_ds *src)
 	else if (peek(src, 0) < dst->min)
 		dst->min = peek(src, 0);
 	dst->arr[dst->len++] = src->arr[--(src->len)];
-	print_operation(OPERATION_PUSH, dst->name);
+	if (flag)
+		print_operation(OPERATION_PUSH, dst->name);
 }
