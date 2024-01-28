@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:08:29 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/28 06:03:56 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/28 07:27:15 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ int			smallest_with_limit(t_ds *s, int limit);
 void		exit_with_error(void);
 int			find_index_of(t_ds *s, int n);
 void		move_cheapest(t_ds *s, t_ds *t, int cheapest_idx);
+void		move_cheapest_reverse(t_ds *s, t_ds *t, int cheapest_idx);
 int			find_cheapest(t_ds *s, t_ds *t);
+int			find_cheapest_reverse(t_ds *s, t_ds *t);
 
 void		print_operation(char *op, char *ds_name);
 
