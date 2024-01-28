@@ -6,13 +6,18 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:08:29 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/27 14:58:32 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/28 06:03:56 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
+
+# include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -73,5 +78,14 @@ void		move_cheapest(t_ds *s, t_ds *t, int cheapest_idx);
 int			find_cheapest(t_ds *s, t_ds *t);
 
 void		print_operation(char *op, char *ds_name);
+
+char		*get_next_line(int fd);
+int			has_newline(int start, char *str);
+int			find_newline(char *str);
+int			ft_strlen(char *str);
+char		*strjoin(char *s1, char *s2, int s1_len, int s2_len);
+
+int			process_operations(t_ds *a, t_ds *b);
+int			check_ds(t_ds *a, t_ds *b);
 
 #endif

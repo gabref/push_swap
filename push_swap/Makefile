@@ -6,7 +6,7 @@
 #    By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 16:03:10 by galves-f          #+#    #+#              #
-#    Updated: 2024/01/27 21:48:45 by galves-f         ###   ########.fr        #
+#    Updated: 2024/01/28 06:28:34 by galves-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@
 
 
 NAME	= push_swap
+NAME_B 	= checker
 CC 		= cc
 CFLAGS	= -Wall -Werror -Wextra -ggdb
 # -std=c++98
@@ -51,6 +52,22 @@ SRCS			= initializers.c \
 
 MAIN			= main.c
 
+SRCS_B			= initializers.c \
+				  	print.c \
+				  	get_next_line.c \
+				  	get_next_line_utils.c \
+				  	free_utils.c \
+				  	checker_utils.c \
+				  	utils.c \
+				  	utils_ds.c \
+				  	utils_sorting.c \
+				  	utils_finders.c \
+				  	split.c \
+					operation_swap.c \
+					operation_push.c \
+					operation_rotate.c
+MAIN_B			= checker.c
+
 ################################################################################
 #                                  Makefile  objs                              #
 ################################################################################
@@ -61,6 +78,10 @@ OBJS				= $(addprefix objs/, ${SRCS:$(FILE_EXTENSION)=.o})
 OBJ_MAIN			= $(addprefix objs/, ${MAIN:$(FILE_EXTENSION)=.o})
 DEPS				= $(addprefix objs/, ${SRCS:$(FILE_EXTENSION)=.d})
 DEPS_MAIN			= $(addprefix objs/, ${MAIN:$(FILE_EXTENSION)=.d})
+OBJS_B				= $(addprefix objs/, ${SRCS_B:$(FILE_EXTENSION)=.o})
+OBJ_MAIN_B			= $(addprefix objs/, ${MAIN_B:$(FILE_EXTENSION)=.o})
+DEPS_B				= $(addprefix objs/, ${SRCS_B:$(FILE_EXTENSION)=.d})
+DEPS_MAIN_B			= $(addprefix objs/, ${MAIN_B:$(FILE_EXTENSION)=.d})
 
 ################################################################################
 #                                 Makefile logic                               #
@@ -120,7 +141,7 @@ exit $$RESULT
 endef
 
 define save_files_changed
-	FILE_CPP=`echo $(SRCS) $(MAIN)`; \
+	FILE_CPP=`echo $(SRCS) $(MAIN) $(SRCS_B) $(MAIN_B)`; \
 	FILE_OBJ=`find objs -type f -name '*.o' 2>/dev/null | sed 's/objs\///'`; \
 	TO_COMPILE=`echo $$FILE_CPP | wc -w`; \
 	for FILE in $$FILE_CPP; do \
@@ -210,6 +231,9 @@ endef
 all: header setup $(NAME)
 	@rm -rf .files_changed
 
+bonus: header setup $(NAME_B)
+	@rm -rf .files_changed
+
 header:
 	@printf "%b" "$(OK_COLOR)"
 	@echo "        ___  _____ ___  ___      _        "
@@ -236,6 +260,11 @@ $(NAME):	${OBJS} ${OBJ_MAIN}
 			@$(call display_progress_bar)
 			@$(call run_and_test,$(CC) $(CFLAGS) $(DFLAGS) -I$(INCLUDE_PATH) -o $@ ${OBJS} ${OBJ_MAIN})
 
+-include $(DEPS_B) $(DEPS_MAIN_B)
+$(NAME_B):	${OBJS_B} ${OBJ_MAIN_B}
+			@$(call display_progress_bar)
+			@$(call run_and_test,$(CC) $(CFLAGS) $(DFLAGS) -I$(INCLUDE_PATH) -o $@ ${OBJS_B} ${OBJ_MAIN_B})
+
 setup:
 	@$(call save_files_changed)
 
@@ -249,7 +278,7 @@ clean:		header
 			@printf "%-53b%b" "$(COM_COLOR)clean:" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 
 fclean:		header clean
-			@rm -rf $(NAME)
+			@rm -rf $(NAME) $(NAME_B)
 			@printf "%-53b%b" "$(COM_COLOR)fclean:" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 
 re:			fclean all
