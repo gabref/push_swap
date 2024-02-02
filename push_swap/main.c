@@ -6,7 +6,7 @@
 /*   By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:28 by galves-f          #+#    #+#             */
-/*   Updated: 2024/01/27 21:26:13 by galves-f         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:02:44 by galves-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int	main(int ac, char **av)
 	t_ds	*a;
 	t_ds	*b;
 
-	if (ac == 1 || (ac == 2 && !av[1][0]))
+	if (ac == 1)
+		return (0);
+	if (ac == 2 && !av[1][0])
 		exit_with_error();
 	else if (ac == 2)
 		av = split(av[1], ' ');
