@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile.template                                  :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tmatis <tmatis@student.42.fr>              +#+  +:+       +#+         #
+#    By: galves-f <galves-f@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/07/14 10:00:31 by tmatis            #+#    #+#              #
-#    Updated: 2024/02/02 14:09:38 by galves-f         ###   ########.fr        #
+#    Created: 2024/01/24 16:03:10 by galves-f          #+#    #+#              #
+#    Updated: 2024/02/02 08:29:57 by galves-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,14 @@
 
 
 NAME	= push_swap
-NAME_B	= checker
+NAME_B 	= checker
 CC 		= cc
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra -ggdb
+# -std=c++98
+DFLAGS	= -MMD -MF $(@:.o=.d)
 AUTHOR	= galves-f
 DATE	= 2024/01/24
+HASH	= 
 
 NOVISU 	= 0 # 1 = no progress bar usefull when tty is not available
 
@@ -46,6 +49,7 @@ SRCS			= initializers.c \
 					operation_swap.c \
 					operation_push.c \
 					operation_rotate.c
+
 MAIN			= main.c
 
 SRCS_B			= initializers.c \
@@ -68,14 +72,12 @@ MAIN_B			= checker.c
 #                                  Makefile  objs                              #
 ################################################################################
 
-SHELL := /bin/bash
-
+SHELL := /bin/zsh
 
 OBJS				= $(addprefix objs/, ${SRCS:$(FILE_EXTENSION)=.o})
 OBJ_MAIN			= $(addprefix objs/, ${MAIN:$(FILE_EXTENSION)=.o})
 DEPS				= $(addprefix objs/, ${SRCS:$(FILE_EXTENSION)=.d})
 DEPS_MAIN			= $(addprefix objs/, ${MAIN:$(FILE_EXTENSION)=.d})
-
 OBJS_B				= $(addprefix objs/, ${SRCS_B:$(FILE_EXTENSION)=.o})
 OBJ_MAIN_B			= $(addprefix objs/, ${MAIN_B:$(FILE_EXTENSION)=.o})
 DEPS_B				= $(addprefix objs/, ${SRCS_B:$(FILE_EXTENSION)=.d})
@@ -93,8 +95,6 @@ WARN_COLOR  = \033[0;33m
 NO_COLOR    = \033[m
 
 COM_STRING   = "compiling"
-
-HASH	= 
 
 ifeq ($(OS),Windows_NT) 
     detected_OS := Windows
@@ -120,6 +120,25 @@ ifeq ($(shell git rev-parse HEAD &>/dev/null; echo $$?),0)
 	DATE	:= $(shell git log -1 --date=format:"%Y/%m/%d %T" --format="%ad")
 	HASH	:= $(shell git rev-parse --short HEAD)
 endif
+
+define run_and_test
+printf "%b%-46b" "$(COM_COLOR)$(COM_STRING) " "$(OBJ_COLOR)$(@F)$(NO_COLOR)"; \
+$(RUN_CMD); \
+if [ $$RESULT -ne 0 ]; then \
+	printf "%b\n" "$(ERROR_COLOR)[✖]$(NO_COLOR)"; \
+	rm -rf .files_changed; \
+	if [ $(NOVISU) -eq 0 ]; then \
+		echo; \
+	fi; \
+elif [ -s $@.log ]; then \
+	printf "%b\n" "$(WARN_COLOR)[⚠]$(NO_COLOR)"; \
+else  \
+	printf "%b\n" "$(OK_COLOR)[✓]$(NO_COLOR)"; \
+fi; \
+cat $@.log; \
+rm -f $@.log; \
+exit $$RESULT
+endef
 
 define save_files_changed
 	FILE_CPP=`echo $(SRCS) $(MAIN) $(SRCS_B) $(MAIN_B)`; \
@@ -209,7 +228,10 @@ endef
 #                                 Makefile rules                             #
 ################################################################################
 
-all: header $(NAME)
+all: header setup $(NAME)
+	@rm -rf .files_changed
+
+bonus: header setup $(NAME_B)
 	@rm -rf .files_changed
 
 header:
@@ -221,7 +243,6 @@ header:
 	@echo "     \___  |./ /___| |  | | (_| |   <  __/"
 	@echo "         |_/\_____/\_|  |_/\__,_|_|\_\___| v2"
 	@echo
-	@echo "OS : $(detected_OS)"
 ifneq ($(HASH),)
 	@printf "%b" "$(OBJ_COLOR)Name:	$(WARN_COLOR)$(NAME)@$(HASH)\n"
 else
@@ -234,63 +255,32 @@ endif
 	@echo
 
 
+-include $(DEPS) $(DEPS_MAIN)
 $(NAME):	${OBJS} ${OBJ_MAIN}
-			$(CC) $(CFLAGS) -I$(INCLUDE_PATH) -o $@ ${OBJS} ${OBJ_MAIN}
+			@$(call display_progress_bar)
+			@$(call run_and_test,$(CC) $(CFLAGS) $(DFLAGS) -I$(INCLUDE_PATH) -o $@ ${OBJS} ${OBJ_MAIN})
 
-bonus:	${OBJS_B} ${OBJ_MAIN_B}
-		$(CC) $(CFLAGS) -I$(INCLUDE_PATH) -o $(NAME_B) ${OBJS_B} ${OBJ_MAIN_B}
+-include $(DEPS_B) $(DEPS_MAIN_B)
+$(NAME_B):	${OBJS_B} ${OBJ_MAIN_B}
+			@$(call display_progress_bar)
+			@$(call run_and_test,$(CC) $(CFLAGS) $(DFLAGS) -I$(INCLUDE_PATH) -o $@ ${OBJS_B} ${OBJ_MAIN_B})
 
 setup:
 	@$(call save_files_changed)
 
 objs/%.o: 	$(SRCS_PATH)/%$(FILE_EXTENSION)
 			@mkdir -p $(dir $@)
-			$(CC) $(CFLAGS) -c $< -o $@ -I$(INCLUDE_PATH)
+			@$(call display_progress_bar)
+			@$(call run_and_test,$(CC) $(CFLAGS) $(DFLAGS) -c $< -o $@ -I$(INCLUDE_PATH))
 
 clean:		header
 			@rm -rf objs objs_tests
 			@printf "%-53b%b" "$(COM_COLOR)clean:" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 
 fclean:		header clean
-			@rm -rf $(NAME)
+			@rm -rf $(NAME) $(NAME_B)
 			@printf "%-53b%b" "$(COM_COLOR)fclean:" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
 
 re:			fclean all
 
-test2:$(NAME)
-	$(eval ARG = $(shell gshuf -i 0-100 -n 2))
-	./push_swap $(ARG) | ./checker $(ARG)
-	@echo -n "Instructions: "
-	@./push_swap $(ARG) | wc -l
-
-test3:$(NAME)
-	$(eval ARG = $(shell shuf -i 0-100 -n 3))
-	./push_swap $(ARG) | ./checker $(ARG)
-	@echo -n "Instructions: "
-	@./push_swap $(ARG) | wc -l
-
-test5:$(NAME)					
-	$(eval ARG = $(shell gshuf -i 0-5000 -n 5))
-	./push_swap $(ARG) | ./checker $(ARG)
-	@echo -n "Instructions: "
-	@./push_swap $(ARG) | wc -l
-
-test100:$(NAME)
-	$(eval ARG = $(shell gshuf -i 0-5000 -n 100))
-	./push_swap $(ARG) | ./checker $(ARG)
-	@echo -n "Instructions: "
-	@./push_swap $(ARG) | wc -l
-
-test500:$(NAME)
-	$(eval ARG = $(shell gshuf -i 0-5000 -n 500))
-	./push_swap $(ARG) | ./checker $(ARG)
-	@echo -n "Instructions: "
-	@./push_swap $(ARG) | wc -l
-
-test1000:$(NAME)
-	$(eval ARG = $(shell gshuf -i 0-5000 -n 1000))
-	./push_swap $(ARG) | ./checker $(ARG)
-	@echo -n "Instructions: "
-	@./push_swap $(ARG) | wc -l
-
-.PHONY:		all clean fclean re header test2 test3 test5 test100 test500 test1000
+.PHONY:		all clean fclean re header

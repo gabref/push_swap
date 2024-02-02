@@ -1,0 +1,86 @@
+NAME 			= push_swap
+CC 				= cc
+CFLAGS 			= -Wall -Wextra -Werror
+INCLUDES 		= -I .
+
+COMMON_SRCS = initializers.c \
+                print.c \
+                free_utils.c \
+                sorting.c \
+                utils.c \
+                utils_ds.c \
+                utils_sorting.c \
+                utils_finders.c \
+                split.c \
+                operation_swap.c \
+                operation_push.c \
+                operation_rotate.c
+
+PUSH_SWAP_SRCS 	= $(COMMON_SRCS) main.c
+CHECKER_SRCS 	= $(COMMON_SRCS) \
+					checker.c  \
+				  	get_next_line.c \
+				  	get_next_line_utils.c \
+				  	checker_utils.c \
+
+PUSH_SWAP_OBJS 	= $(PUSH_SWAP_SRCS:.c=.o)
+CHECKER_OBJS 	= $(CHECKER_SRCS:.c=.o)
+
+all: $(NAME)
+
+push_swap: $(PUSH_SWAP_OBJS)
+	$(CC) $(CFLAGS) $(INCLUDES) $(PUSH_SWAP_OBJS) -o push_swap 
+
+checker: $(CHECKER_OBJS)
+	$(CC) $(CFLAGS) $(INCLUDES) $(CHECKER_OBJS) -o checker
+
+bonus: $(NAME) checker
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+clean:
+	rm -f $(PUSH_SWAP_OBJS) $(CHECKER_OBJS)
+
+fclean: clean
+	rm -f $(NAME) checker
+
+re: fclean all
+
+test2:$(NAME)
+	$(eval ARG = $(shell gshuf -i 0-100 -n 2))
+	./push_swap $(ARG) | ./checker $(ARG)
+	@echo -n "Instructions: "
+	@./push_swap $(ARG) | wc -l
+
+test3:$(NAME)
+	$(eval ARG = $(shell shuf -i 0-100 -n 3))
+	./push_swap $(ARG) | ./checker $(ARG)
+	@echo -n "Instructions: "
+	@./push_swap $(ARG) | wc -l
+
+test5:$(NAME)					
+	$(eval ARG = $(shell gshuf -i 0-5000 -n 5))
+	./push_swap $(ARG) | ./checker $(ARG)
+	@echo -n "Instructions: "
+	@./push_swap $(ARG) | wc -l
+
+test100:$(NAME)
+	$(eval ARG = $(shell gshuf -i 0-5000 -n 100))
+	./push_swap $(ARG) | ./checker $(ARG)
+	@echo -n "Instructions: "
+	@./push_swap $(ARG) | wc -l
+
+test500:$(NAME)
+	$(eval ARG = $(shell gshuf -i 0-5000 -n 500))
+	./push_swap $(ARG) | ./checker $(ARG)
+	@echo -n "Instructions: "
+	@./push_swap $(ARG) | wc -l
+
+test1000:$(NAME)
+	$(eval ARG = $(shell gshuf -i 0-5000 -n 1000))
+	./push_swap $(ARG) | ./checker $(ARG)
+	@echo -n "Instructions: "
+	@./push_swap $(ARG) | wc -l
+
+.PHONY: all clean fclean re test2 test3 test5 test100 test500 test1000
